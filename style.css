@@ -7,10 +7,60 @@
 }
 
 body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
   background: black;
   color: white;
 }
 
 img {
   max-width: 100%;
+  height: auto;
+  border-radius: 50%;
+  aspect-ratio: 1/1;
+  object-fit: fill;
+}
+
+.container {
+  max-width: 500px;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 2em;
+}
+
+.progress-bar-container {
+  width: 70%;
+  position: relative;
+}
+
+.progress-bar {
+  background: white;
+  animation: progress-bar 60s infinite;
+  height: 4px;
+  position: absolute;
+  border-radius: 0.3em;
+  z-index: 4;
+}
+
+.progress-bar-bg {
+  width: 100%;
+  height: 4px;
+  position: absolute;
+  background: grey;
+  border-radius: 0.3em;
+  z-index: 1;
+}
+
+@keyframes progress-bar {
+  from {
+    width: 0%;
+  }
+
+  to {
+    width: 100%;
+  }
 }
