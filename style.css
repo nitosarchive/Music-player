@@ -6,6 +6,10 @@
   box-sizing: border-box;
 }
 
+:root {
+  --bg-color: rgba(36, 36, 36);
+}
+
 body {
   display: flex;
   align-items: center;
@@ -17,19 +21,10 @@ body {
 
 img {
   max-width: 100%;
-  height: auto;
-  border-radius: 50%;
-  aspect-ratio: 1/1;
-  object-fit: fill;
 }
 
 .container {
   max-width: 500px;
-  display: flex;
-  text-align: center;
-  flex-direction: column;
-  align-items: center;
-  gap: 2em;
 }
 
 .progress-bar-container {
@@ -53,14 +48,4 @@ img {
   background: grey;
   border-radius: 0.3em;
   z-index: 1;
-}
-
-@keyframes progress-bar {
-  from {
-    width: 0%;
-  }
-
-  to {
-    width: 100%;
-  }
 }

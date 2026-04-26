@@ -9,26 +9,39 @@
   </head>
   <body>
     <div class="container">
-      <div>
-        <div>
-          <h2>Passage</h2>
-          <img src="./imgs/thumb-1920-840846.jpg" alt="thumbnail-art" />
-        </div>
-        <span>Roary</span>
+      <header>
+        <button class="previous-page">previous</button>
+        <span>Now playing</span>
+        <button class="queue">queue</button>
+      </header>
 
-        <div><img src="" alt="" /></div>
-        <div id="audio-controls">
-          <button></button>
-          <button></button>
-          <button></button>
-          <button></button>
-          <button></button>
+      <div>
+        <img
+          class="album-cover"
+          src="./imgs/thumb-1920-840846.jpg"
+          alt="album-cover"
+        />
+        <div>
+          <h3>Save your Tears</h3>
+          <span>The Weeknd</span>
         </div>
       </div>
       <div class="progress-bar-container">
         <div class="progress-bar"></div>
         <div class="progress-bar-bg"></div>
       </div>
+
+      <div id="audio-controls">
+        <button id="shuffle">shuffle</button>
+        <button id="last-song">last</button>
+        <button id="play">Play</button>
+        <button id="next-song">next</button>
+        <button id="repeat">repeat</button>
+      </div>
     </div>
   </body>
 </html>
+
+<audio id="mySong">
+  <source src="./audio/Don Toliver - TMU.mp3" />
+</audio>
