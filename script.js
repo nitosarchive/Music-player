@@ -4,6 +4,8 @@ const fullTime = document.getElementById("fullTime");
 const intervalTime = document.getElementById("intervalTime");
 let parseInterval = 0;
 let interval;
+let minute;
+let seconds;
 
 play.addEventListener("click", () => {
   if (!mySong.paused) {
@@ -15,9 +17,9 @@ play.addEventListener("click", () => {
     interval = setInterval(() => {
       parseInterval++;
 
-      let minute = Math.floor(parseInterval / 60);
+      minute = Math.floor(parseInterval / 60);
 
-      let seconds = parseInterval % 60;
+      seconds = parseInterval % 60;
 
       seconds.toString().padStart("2", "0");
       minute.toString().padStart("1", "0");
