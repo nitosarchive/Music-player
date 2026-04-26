@@ -1,7 +1,10 @@
-document.getElementById("play").addEventListener("click", () => {
-  if (!document.getElementById("mySong").paused) {
-    document.getElementById("mySong").pause();
+const play = document.getElementById("play");
+const mySong = document.getElementById("mySong");
+
+play.addEventListener("click", () => {
+  if (!mySong.paused) {
+    mySong.pause();
   } else {
-    document.getElementById("mySong").play();
+    mySong.play();
   }
 });
