@@ -11,9 +11,17 @@ play.addEventListener("click", () => {
     mySong.pause();
   } else {
     mySong.play();
+    mySong.mute;
     interval = setInterval(() => {
       parseInterval++;
-      intervalTime.innerText = parseInterval;
+
+      let minute = Math.floor(parseInterval / 60);
+
+      let seconds = parseInterval % 60;
+
+      seconds.toString().padStart("2", "0");
+      minute.toString().padStart("1", "0");
+      intervalTime.innerText = `${minute}:${seconds}`;
     }, 1000);
   }
 });
