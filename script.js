@@ -57,13 +57,11 @@ const mySongInventory = [
 ];
 
 document.getElementById("nextSong").addEventListener("click", () => {
-  if (songIndex === mySongInventory) {
+  if (songIndex === mySongInventory.length - 1) {
     songIndex = 0;
   } else {
     songIndex++;
   }
-
-  console.log(songIndex);
 
   mySong.src = mySongInventory[songIndex].src;
   if (mySong.oncanplay) {
