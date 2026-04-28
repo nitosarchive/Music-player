@@ -7,6 +7,7 @@ let interval;
 let minute;
 let seconds;
 let songIndex = 0;
+const repeat = document.getElementById("repeat");
 
 function getInterval() {
   interval = setInterval(() => {
@@ -59,11 +60,13 @@ const mySongInventory = [
   },
 ];
 
-document.getElementById("nextSong").addEventListener("click", () => {
-  if (songIndex === mySongInventory.length - 1) {
-    songIndex = 0;
-  } else {
-    songIndex++;
+function fetchSong(event) {
+  if (event.target.id === "nextSong" || "previousSong") {
+    if (songIndex === mySongInventory.length - 1) {
+      songIndex = 0;
+    } else {
+      if (event.target.id === "nextSong") songIndex++;
+    }
   }
   time = 0;
   clearInterval(interval);
@@ -75,4 +78,11 @@ document.getElementById("nextSong").addEventListener("click", () => {
   mySong.src = mySongInventory[songIndex].src;
 
   mySong.play();
+}
+
+document.getElementById("nextSong").addEventListener("click", fetchSong);
+
+repeat.addEventListener("click", () => {
+  clearInterval(interval);
+  fetchSong(event);
 });
