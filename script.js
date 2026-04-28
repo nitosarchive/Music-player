@@ -2,7 +2,7 @@ const play = document.getElementById("play");
 const mySong = document.getElementById("mySong");
 const fullTime = document.getElementById("fullTime");
 const intervalTime = document.getElementById("intervalTime");
-let parseInterval = 0;
+let time = 0;
 let interval;
 let minute;
 let seconds;
@@ -15,11 +15,11 @@ play.addEventListener("click", () => {
     mySong.play();
     mySong.mute;
     interval = setInterval(() => {
-      parseInterval++;
+      time++;
 
-      minute = Math.floor(parseInterval / 60);
+      minute = Math.floor(time / 60);
 
-      seconds = parseInterval % 60;
+      seconds = time % 60;
 
       seconds.toString().padStart("2", "0");
       minute.toString().padStart("1", "0");
@@ -31,3 +31,7 @@ play.addEventListener("click", () => {
 window.onload = () => {
   fullTime.innerText = Math.floor(mySong.duration / 60);
 };
+
+mySong.src = "./audio/Future - Lowlife ft The Weeknd.mp3";
+
+mySongList = [];
