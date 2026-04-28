@@ -8,24 +8,27 @@ let minute;
 let seconds;
 let songIndex = 0;
 
+function getInterval() {
+  interval = setInterval(() => {
+    time++;
+
+    minute = Math.floor(time / 60);
+
+    seconds = time % 60;
+
+    seconds.toString().padStart("2", "0");
+    minute.toString().padStart("1", "0");
+    intervalTime.innerText = `${minute}:${seconds}`;
+  }, 1000);
+}
+
 play.addEventListener("click", () => {
   if (!mySong.paused) {
     clearInterval(interval);
     mySong.pause();
   } else {
     mySong.play();
-    mySong.mute;
-    interval = setInterval(() => {
-      time++;
-
-      minute = Math.floor(time / 60);
-
-      seconds = time % 60;
-
-      seconds.toString().padStart("2", "0");
-      minute.toString().padStart("1", "0");
-      intervalTime.innerText = `${minute}:${seconds}`;
-    }, 1000);
+    getInterval();
   }
 });
 
@@ -62,10 +65,14 @@ document.getElementById("nextSong").addEventListener("click", () => {
   } else {
     songIndex++;
   }
+  time = 0;
+  clearInterval(interval);
+  getInterval();
+  setTimeout(() => {
+    fullTime.innerText = Math.floor(mySong.duration / 60);
+  }, 2000);
 
   mySong.src = mySongInventory[songIndex].src;
-  if (mySong.oncanplay) {
-    fullTime.innerText = Math.floor(mySong.duration / 60);
-  }
+
   mySong.play();
 });
