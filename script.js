@@ -61,7 +61,8 @@ const mySongInventory = [
 ];
 
 function fetchSong(event) {
-  if (event.target.id === "nextSong" || "previousSong") {
+  if (event.target.id === "nextSong" || event.target.id === "previousSong") {
+    console.log(event.target.id);
     if (songIndex === mySongInventory.length - 1) {
       songIndex = 0;
     } else {
@@ -82,7 +83,4 @@ function fetchSong(event) {
 
 document.getElementById("nextSong").addEventListener("click", fetchSong);
 
-repeat.addEventListener("click", () => {
-  clearInterval(interval);
-  fetchSong(event);
-});
+repeat.addEventListener("click", fetchSong);
