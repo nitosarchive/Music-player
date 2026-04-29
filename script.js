@@ -61,13 +61,16 @@ const mySongInventory = [
 ];
 
 function fetchSong(event) {
-  if (event.target.id === "nextSong" || event.target.id === "previousSong") {
-    console.log(event.target.id);
-    if (songIndex === mySongInventory.length - 1) {
-      songIndex = 0;
-    } else {
-      if (event.target.id === "nextSong") songIndex++;
+  if (event.target.id === "nextSong") {
+    if (songIndex === mySongInventory.length) songIndex = 0;
+    else {
+      songIndex++;
     }
+  } else if (event.target.id === "lastSong") {
+    if (songIndex === 0) {
+      songIndex = mySongInventory.length;
+    }
+    songIndex--;
   }
   time = 0;
   clearInterval(interval);
@@ -75,7 +78,6 @@ function fetchSong(event) {
   setTimeout(() => {
     fullTime.innerText = Math.floor(mySong.duration / 60);
   }, 2000);
-
   mySong.src = mySongInventory[songIndex].src;
 
   mySong.play();
@@ -84,3 +86,5 @@ function fetchSong(event) {
 document.getElementById("nextSong").addEventListener("click", fetchSong);
 
 repeat.addEventListener("click", fetchSong);
+
+document.getElementById("lastSong").addEventListener("click", fetchSong);
