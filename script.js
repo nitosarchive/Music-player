@@ -61,17 +61,20 @@ const mySongInventory = [
 ];
 
 function fetchSong(event) {
-  if (event.target.id === "nextSong") {
-    if (songIndex === mySongInventory.length) songIndex = 0;
-    else {
-      songIndex++;
+  if (event) {
+    if (event.target.id === "nextSong") {
+      if (songIndex === mySongInventory.length) songIndex = 0;
+      else {
+        songIndex++;
+      }
+    } else if (event.target.id === "lastSong") {
+      if (songIndex === 0) {
+        songIndex = mySongInventory.length;
+      }
+      songIndex--;
     }
-  } else if (event.target.id === "lastSong") {
-    if (songIndex === 0) {
-      songIndex = mySongInventory.length;
-    }
-    songIndex--;
   }
+
   time = 0;
   clearInterval(interval);
   getInterval();
@@ -88,3 +91,8 @@ document.getElementById("nextSong").addEventListener("click", fetchSong);
 repeat.addEventListener("click", fetchSong);
 
 document.getElementById("lastSong").addEventListener("click", fetchSong);
+
+mySong.addEventListener("ended", () => {
+  songIndex++;
+  fetchSong(undefined);
+});
