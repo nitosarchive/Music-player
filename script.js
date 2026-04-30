@@ -44,7 +44,7 @@ play.addEventListener("click", playAudio);
 function totalTime() {
   totalMinutes = Math.floor(mySong.duration / 60);
   totalSeconds = Math.floor(mySong.duration - totalMinutes * 60);
-  fullTime.innerText = `${totalMinutes}:${totalSeconds}`;
+  fullTime.innerText = `${totalMinutes}:${totalSeconds.toString().padStart("2", "0")}`;
 }
 window.onload = totalTime;
 
