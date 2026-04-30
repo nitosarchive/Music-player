@@ -8,6 +8,8 @@ let minute;
 let seconds;
 let songIndex = 0;
 const repeat = document.getElementById("repeat");
+let totalSeconds;
+let totalMinutes;
 
 function getInterval() {
   interval = setInterval(() => {
@@ -18,7 +20,7 @@ function getInterval() {
     seconds = time % 60;
 
     seconds.toString().padStart("2", "0");
-    minute.toString().padStart("1", "0");
+    minute.toString().padStart("2", "0");
     intervalTime.innerText = `${minute}:${seconds}`;
   }, 1000);
 }
@@ -32,10 +34,12 @@ play.addEventListener("click", () => {
     getInterval();
   }
 });
-
-window.onload = () => {
-  fullTime.innerText = Math.floor(mySong.duration / 60);
-};
+function totalTime() {
+  totalMinutes = Math.floor(mySong.duration / 60);
+  totalSeconds = Math.floor(mySong.duration - totalMinutes * 60);
+  fullTime.innerText = `${totalMinutes}:${totalSeconds}`;
+}
+window.onload = totalTime;
 
 const mySongInventory = [
   {
@@ -81,7 +85,7 @@ function fetchSong(event) {
   }
   getInterval();
   setTimeout(() => {
-    fullTime.innerText = Math.floor(mySong.duration / 60);
+    totalTime();
   }, 2000);
   mySong.src = mySongInventory[songIndex].src;
 
