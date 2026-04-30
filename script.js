@@ -42,23 +42,29 @@ const mySongInventory = [
     artist: "Don Toliver",
     song: "TMU",
     src: "./audio/Don Toliver - TMU.mp3",
+    img: "./imgs/octane.webp"
   },
   {
     artist: "future ft. The Weeknd",
     song: "low life",
     src: "./audio/Future - Lowlife ft The Weeknd.mp3",
+    img: "./imgs/low-life.png"
   },
   {
     artist: "goatye feat. kimbra",
     song: "Somebody That I Used To Know",
     src: "./audio/Gotye - Somebody That I Used To Know (feat. Kimbra) Official Music Video (1).mp3",
+    img:"./imgs/stiutk.png"
   },
   {
     artist: "robert miles",
     song: "children",
     src: "./audio/Robert Miles - Children Dream Version.mp3",
+    img: "./imgs/children.jpg"
   },
 ];
+
+
 
 function fetchSong(event) {
   if (event) {
