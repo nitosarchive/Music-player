@@ -54,3 +54,7 @@ img {
 #songName {
   text-transform: capitalize;
 }
+
+img{
+  border-radius: 0.4em;
+}
