@@ -50,5 +50,7 @@ img {
   z-index: 1;
 }
 
-.time-container {
+#artistName,
+#songName {
+  text-transform: capitalize;
 }
