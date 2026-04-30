@@ -28,23 +28,23 @@ function getInterval() {
     intervalTime.innerText = `${minute}:${seconds}`;
   }, 1000);
 }
-
 function playAudio() {
+  if (interval) clearInterval(interval);
+
   if (!mySong.paused) {
-    clearInterval(interval);
     mySong.pause();
   } else {
     mySong.play();
-
     getInterval();
-  }}
+  }
+}
 
 play.addEventListener("click", playAudio);
 
 function totalTime() {
   totalMinutes = Math.floor(mySong.duration / 60);
   totalSeconds = Math.floor(mySong.duration - totalMinutes * 60);
-  fullTime.innerText = `${totalMinutes}:${totalSeconds.toString().padStart("2", "0")}`;
+  fullTime.innerText = `${totalMinutes}:${totalSeconds}`;
 }
 window.onload = totalTime;
 
@@ -73,6 +73,12 @@ const mySongInventory = [
     src: "./audio/Robert Miles - Children Dream Version.mp3",
     img: "./imgs/children.jpg",
   },
+  {
+    artist: "Kanye",
+    song: "ALL THE LOVE",
+    src: "./audio/YE - ALL THE LOVE (feat. ANDRÉ TROUTMAN).mp3",
+    img: "./imgs/bully.jpg",
+  },
 ];
 
 function fetchSong(event) {
@@ -93,8 +99,7 @@ function fetchSong(event) {
   time = 0;
 
   clearInterval(interval);
-    
-  
+
   getInterval();
   setTimeout(() => {
     totalTime();
