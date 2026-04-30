@@ -76,7 +76,9 @@ function fetchSong(event) {
   }
 
   time = 0;
-  clearInterval(interval);
+  if (interval) {
+    clearInterval(interval);
+  }
   getInterval();
   setTimeout(() => {
     fullTime.innerText = Math.floor(mySong.duration / 60);
