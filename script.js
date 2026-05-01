@@ -23,9 +23,7 @@ function getInterval() {
 
     seconds = time % 60;
 
-    seconds.toString().padStart("2", "0");
-    minute.toString().padStart("2", "0");
-    intervalTime.innerText = `${minute}:${seconds}`;
+    intervalTime.innerText = `${minute.toString().padStart("2", "0")}:${seconds}`;
   }, 1000);
 }
 function playAudio() {
@@ -84,7 +82,7 @@ const mySongInventory = [
 function fetchSong(event) {
   if (event) {
     if (event.target.id === "nextSong") {
-      if (songIndex === mySongInventory.length) songIndex = 0;
+      if (songIndex === mySongInventory.length - 1) songIndex = 0;
       else {
         songIndex++;
       }
@@ -119,6 +117,8 @@ repeat.addEventListener("click", fetchSong);
 document.getElementById("lastSong").addEventListener("click", fetchSong);
 
 mySong.addEventListener("ended", () => {
-  songIndex++;
+  if (songIndex != mySongInventory.length - 1) {
+    songIndex++;
+  } else songIndex = 0;
   fetchSong(undefined);
 });

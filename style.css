@@ -18,16 +18,35 @@ body {
   justify-content: center;
   min-height: 100vh;
   background: rgba(36, 36, 36);
-  font-family: "Lato";
+  font-family: "Lato", sans-serif;
   color: white;
 }
 
-img {
-  max-width: 100%;
+.album-cover {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}
+
+button {
+  font: inherit;
 }
 
 .container {
-  max-width: 500px;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+  padding: 1em;
+  align-items: center;
+  background: black;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 1em;
 }
 
 .progress-bar-container {
