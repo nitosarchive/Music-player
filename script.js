@@ -16,7 +16,6 @@ let totalMinutes;
 
 function getInterval() {
   interval = setInterval(() => {
-    if (mySong.paused) return;
     time++;
 
     minute = Math.floor(time / 60);
@@ -26,9 +25,8 @@ function getInterval() {
     intervalTime.innerText = `${minute.toString().padStart("2", "0")}:${seconds}`;
   }, 1000);
 }
-function playAudio() {
-  if (interval) clearInterval(interval);
 
+function playAudio() {
   if (!mySong.paused) {
     mySong.pause();
   } else {
@@ -42,7 +40,7 @@ play.addEventListener("click", playAudio);
 function totalTime() {
   totalMinutes = Math.floor(mySong.duration / 60);
   totalSeconds = Math.floor(mySong.duration - totalMinutes * 60);
-  fullTime.innerText = `${totalMinutes}:${totalSeconds.toString().padStart("2", "0")}`;
+  fullTime.innerText = `${totalMinutes}:${totalSeconds}`;
 }
 window.onload = totalTime;
 
