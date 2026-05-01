@@ -22,6 +22,13 @@ body {
   color: white;
 }
 
+header{
+  display:flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center
+}
+
 .album-cover {
   width: 200px;
   height: 200px;
@@ -97,7 +104,8 @@ img {
 
 #audioControls{
   display: flex;
-  gap: 0.4em
+  width: 100%;
+  justify-content: space-between
 }
 
 .hidden{
