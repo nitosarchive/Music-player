@@ -34,6 +34,7 @@ button {
   display:flex;
   justify-content: center;
   border: none;
+  cursor: pointer;
   
 }
 
@@ -41,7 +42,7 @@ button img{
   width: 30px;
   height: auto;
   padding: 0.3em;
-
+  pointer-events: none;
 
 }
 
