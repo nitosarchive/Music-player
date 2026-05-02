@@ -28,6 +28,7 @@ function fetchProgress(event) {
   animation = setInterval(() => {
     let duration = 100 / mySong.duration;
     if (animationProgress === 100) return;
+    if (mySong.paused) return;
     animationProgress = animationProgress + duration;
     progressBar.style.width = `${animationProgress}%`;
   }, 1000);
@@ -47,13 +48,13 @@ function getInterval() {
 
 function playAudio() {
   if (interval) clearInterval(interval);
-  fetchProgress(null);
   if (!mySong.paused) {
     mySong.pause();
   } else {
     mySong.play();
     getInterval();
   }
+  fetchProgress();
 }
 
 play.addEventListener("click", playAudio);
