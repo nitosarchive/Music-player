@@ -16,6 +16,7 @@ let totalSeconds;
 let totalMinutes;
 let animation;
 let animationProgress = 0;
+let fetchTimeInterval;
 
 function fetchProgress(event) {
   if (event) {
@@ -60,9 +61,16 @@ function playAudio() {
 play.addEventListener("click", playAudio);
 
 function totalTime() {
+  fetchTimeInterval = false;
+  
+  setInterval(() => {
+  if(fetchTimeInterval === true ) return;
   totalMinutes = Math.floor(mySong.duration / 60);
   totalSeconds = Math.floor(mySong.duration - totalMinutes * 60);
   fullTime.innerText = `${totalMinutes.toString().padStart("1", "0")}:${totalSeconds.toString().padStart("2", "0")}`;
+  if(mySong.duration) return;
+  }, 200);
+  
 }
 window.onload = totalTime;
 
@@ -119,9 +127,8 @@ function fetchSong(event) {
   clearInterval(interval);
 
   getInterval();
-  setInterval(() => {
-    totalTime();
-  }, 500);
+  
+  totalTime();
   mySong.src = mySongInventory[songIndex].src;
   songName.innerText = mySongInventory[songIndex].song;
   artistName.innerText = mySongInventory[songIndex].artist;
