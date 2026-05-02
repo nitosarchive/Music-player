@@ -44,7 +44,7 @@ function getInterval() {
 
     seconds = time % 60;
 
-    intervalTime.innerText = `${minute.toString().padStart("2", "0")}:${seconds}`;
+    intervalTime.innerText = `${minute.toString().padStart("2", "0")}:${seconds.toString().padStart("2", "0")}`;
   }, 1000);
 }
 
