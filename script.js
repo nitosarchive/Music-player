@@ -35,6 +35,7 @@ function fetchProgress(event) {
   }, 1000);
 }
 function getInterval() {
+   intervalTime.innerText = "00:00c"
   interval = setInterval(() => {
     if (mySong.paused) return;
     time++;
