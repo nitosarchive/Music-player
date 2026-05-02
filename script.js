@@ -6,10 +6,8 @@ const artistName = document.getElementById("artistName");
 const songName = document.getElementById("songName");
 const albumCover = document.querySelector(".album-cover");
 const progressBar = document.querySelector(".progress-bar");
-let time = 0;
-let interval;
-let minute;
-let seconds;
+const playBtn = document.querySelector(".play-btn");
+const pauseBtn = document.querySelector(".pause-btn")
 let songIndex = 0;
 const repeat = document.getElementById("repeat");
 let totalSeconds;
@@ -17,6 +15,8 @@ let totalMinutes;
 let animation;
 let animationProgress = 0;
 let fetchTimeInterval;
+let interval;
+let time = 0;
 
 function fetchProgress(event) {
   if (event) {
@@ -51,9 +51,14 @@ function playAudio() {
   if (interval) clearInterval(interval);
   if (!mySong.paused) {
     mySong.pause();
+    
+    playBtn.classList.remove("hidden");
+    pauseBtn.classList.add("hidden");
   } else {
     mySong.play();
     getInterval();
+    playBtn.classList.add("hidden");
+    pauseBtn.classList.remove("hidden");
   }
   fetchProgress();
 }
