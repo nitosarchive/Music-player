@@ -65,10 +65,12 @@ function totalTime() {
   
   setInterval(() => {
   if(fetchTimeInterval === true ) return;
+  if(mySong.duration){
   totalMinutes = Math.floor(mySong.duration / 60);
   totalSeconds = Math.floor(mySong.duration - totalMinutes * 60);
-  fullTime.innerText = `${totalMinutes.toString().padStart("1", "0")}:${totalSeconds.toString().padStart("2", "0")}`;
-  if(mySong.duration) return;
+  
+  fullTime.innerText = `${totalMinutes.toString().padStart("1", "0")}:${totalSeconds.toString().padStart("2", "0")}`;}
+  if(mySong.duration) fetchTimeInterval = true;
   }, 200);
   
 }
