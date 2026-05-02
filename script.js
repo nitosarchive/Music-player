@@ -17,10 +17,17 @@ let totalMinutes;
 let animation;
 let animationProgress = 0;
 
-function fetchProgress() {
+function fetchProgress(event) {
+  if (event) {
+    if (event.target.id === "nextSong" || event.target.id === "mySong") {
+      progressBar.style.width = "0%";
+      animationProgress = 0;
+    }
+  }
+  if (animation) clearInterval(animation);
   animation = setInterval(() => {
     let duration = 100 / mySong.duration;
-    if (animation === 100) return;
+    if (animationProgress === 100) return;
     animationProgress = animationProgress + duration;
     progressBar.style.width = `${animationProgress}%`;
   }, 1000);
@@ -40,7 +47,7 @@ function getInterval() {
 
 function playAudio() {
   if (interval) clearInterval(interval);
-  fetchProgress();
+  fetchProgress(null);
   if (!mySong.paused) {
     mySong.pause();
   } else {
@@ -105,7 +112,7 @@ function fetchSong(event) {
       songIndex--;
     }
   }
-
+  fetchProgress(event);
   time = 0;
 
   clearInterval(interval);
@@ -132,5 +139,6 @@ mySong.addEventListener("ended", () => {
   if (songIndex != mySongInventory.length - 1) {
     songIndex++;
   } else songIndex = 0;
+  fetchProgress(event);
   fetchSong(undefined);
 });

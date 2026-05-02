@@ -74,20 +74,22 @@ button img {
 .progress-bar-container {
   width: 100%;
   position: relative;
+  height: 4px;
 }
 
 .progress-bar {
   background: white;
   animation: progress-bar 60s infinite;
-  height: 4px;
+  height: inherit;
   position: absolute;
   border-radius: 0.3em;
   z-index: 4;
 }
 
-.progress-bar:hover {
-  height: 6px;
-  transition: height 0.5s ease;
+.progress-bar-container:hover {
+  background-color: 
+  cursor: pointer;
+  transition: background-color 0.5s ease;
 }
 
 .progress-bar-bg {
