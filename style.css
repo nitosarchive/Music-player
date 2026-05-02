@@ -104,6 +104,12 @@ button img {
   z-index: 1;
 }
 
+.time-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
 #artistName,
 #songName {
   text-transform: capitalize;
