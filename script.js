@@ -5,6 +5,7 @@ const intervalTime = document.getElementById("intervalTime");
 const artistName = document.getElementById("artistName");
 const songName = document.getElementById("songName");
 const albumCover = document.querySelector(".album-cover");
+const progressBar = document.querySelector(".progress-bar");
 let time = 0;
 let interval;
 let minute;
@@ -13,7 +14,17 @@ let songIndex = 0;
 const repeat = document.getElementById("repeat");
 let totalSeconds;
 let totalMinutes;
+let animation;
+let animationProgress = 0;
 
+function fetchProgress() {
+  animation = setInterval(() => {
+    let duration = 100 / mySong.duration;
+    if (animation === 100) return;
+    animationProgress = animationProgress + duration;
+    progressBar.style.width = `${animationProgress}%`;
+  }, 1000);
+}
 function getInterval() {
   interval = setInterval(() => {
     if (mySong.paused) return;
@@ -29,6 +40,7 @@ function getInterval() {
 
 function playAudio() {
   if (interval) clearInterval(interval);
+  fetchProgress();
   if (!mySong.paused) {
     mySong.pause();
   } else {

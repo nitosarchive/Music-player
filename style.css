@@ -22,11 +22,11 @@ body {
   color: white;
 }
 
-header{
-  display:flex;
+header {
+  display: flex;
   width: 100%;
   justify-content: space-between;
-  align-items: center
+  align-items: center;
 }
 
 .album-cover {
@@ -38,19 +38,18 @@ header{
 button {
   font: inherit;
   border-radius: 50%;
-  display:flex;
+  display: flex;
   justify-content: center;
   border: none;
   cursor: pointer;
   outline: none;
 }
 
-button img{
+button img {
   width: 30px;
   height: auto;
   padding: 0.3em;
   pointer-events: none;
-
 }
 
 .container {
@@ -61,7 +60,7 @@ button img{
   gap: 1.5em;
   padding: 1em;
   align-items: center;
-  background: rgba(25,27,40);
+  background: rgba(25, 27, 40);
 }
 
 .wrapper {
@@ -73,7 +72,7 @@ button img{
 }
 
 .progress-bar-container {
-  width: 70%;
+  width: 100%;
   position: relative;
 }
 
@@ -84,6 +83,11 @@ button img{
   position: absolute;
   border-radius: 0.3em;
   z-index: 4;
+}
+
+.progress-bar:hover {
+  height: 6px;
+  transition: height 0.5s ease;
 }
 
 .progress-bar-bg {
@@ -104,17 +108,16 @@ img {
   max-width: 100%;
 }
 
-#audioControls{
+#audioControls {
   display: flex;
   width: 100%;
-  justify-content: space-between
+  justify-content: space-between;
 }
 
-.hidden{
+.hidden {
   display: none;
 }
 
-.song-description{
+.song-description {
   width: 100%;
-  
 }
