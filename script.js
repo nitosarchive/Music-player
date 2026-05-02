@@ -19,7 +19,7 @@ let animationProgress = 0;
 
 function fetchProgress(event) {
   if (event) {
-    if (event.target.id === "nextSong" || event.target.id === "mySong" || event.target.id === "repeat") {
+    if (event.target.id === "nextSong" || event.target.id === "lastSong" || event.target.id === "mySong" || event.target.id === "repeat") {
       progressBar.style.width = "0%";
       animationProgress = 0;
     }
@@ -119,9 +119,9 @@ function fetchSong(event) {
   clearInterval(interval);
 
   getInterval();
-  setTimeout(() => {
+  setInterval(() => {
     totalTime();
-  }, 2000);
+  }, 500);
   mySong.src = mySongInventory[songIndex].src;
   songName.innerText = mySongInventory[songIndex].song;
   artistName.innerText = mySongInventory[songIndex].artist;
