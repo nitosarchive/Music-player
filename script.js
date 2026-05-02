@@ -19,7 +19,7 @@ let animationProgress = 0;
 
 function fetchProgress(event) {
   if (event) {
-    if (event.target.id === "nextSong" || event.target.id === "mySong") {
+    if (event.target.id === "nextSong" || event.target.id === "mySong" || event.target.id === "repeat") {
       progressBar.style.width = "0%";
       animationProgress = 0;
     }
