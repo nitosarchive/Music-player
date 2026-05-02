@@ -35,7 +35,7 @@ function fetchProgress(event) {
   }, 1000);
 }
 function getInterval() {
-   intervalTime.innerText = "00:00c"
+  intervalTime.innerText = "00:00"
   interval = setInterval(() => {
     if (mySong.paused) return;
     time++;
@@ -141,7 +141,10 @@ function fetchSong(event) {
   songName.innerText = mySongInventory[songIndex].song;
   artistName.innerText = mySongInventory[songIndex].artist;
   albumCover.src = mySongInventory[songIndex].img;
-
+  if(mySong.paused){
+    playBtn.classList.add("hidden")
+    pauseBtn.classList.remove("hidden")
+  }
   mySong.play();
 }
 
