@@ -65,6 +65,10 @@ function playAudio() {
 }
 
 play.addEventListener("click", playAudio);
+window.addEventListener("keyup",(e)=>{
+  if (e.key != " ") return;
+  playAudio();
+} )
 
 function totalTime() {
   isTotalTime = false;
