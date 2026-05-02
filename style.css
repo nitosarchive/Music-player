@@ -87,7 +87,7 @@ button img {
 }
 
 .progress-bar-container:hover {
-  background-color: 
+  background-color: rgb(16, 125, 172);
   cursor: pointer;
   transition: background-color 0.5s ease;
 }
