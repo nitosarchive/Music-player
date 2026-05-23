@@ -16,7 +16,6 @@ let isTotalTime;
 let interval;
 
 function updateProgress(e){
-  let currentTIme
   const duration = mySong.duration;
   const currentTime = mySong.currentTime
   const progressPercent = (currentTime / duration) * 100;
@@ -25,17 +24,16 @@ function updateProgress(e){
 
 mySong.addEventListener("timeupdate", updateProgress)
 
+function getTime(){
+  minute = Math.floor(Math.floor(mySong.currentTime) / 60);
+  seconds = Math.floor(mySong.currentTime) % 60;
+  intervalTime.innerText = `${minute.toString().padStart("2", "0")}:${seconds.toString().padStart("2", "0")}`;
+}
 
 function getInterval() {
-  intervalTime.innerText = "00:00"
   interval = setInterval(() => {
     if (mySong.paused) return;
-
-    minute = Math.floor(Math.floor(mySong.currentTime) / 60);
-
-    seconds = Math.floor(mySong.currentTime) % 60;
-
-    intervalTime.innerText = `${minute.toString().padStart("2", "0")}:${seconds.toString().padStart("2", "0")}`;
+    getTime()
   }, 1000);
 }
 
@@ -163,7 +161,8 @@ function setProgress(e){
   const clickX = e.offsetX
   const duration = mySong.duration
   mySong.currentTime = (clickX/width) * duration
+  getTime()
 }
 
-progressContainer.addEventListener("click", setProgress)
+progressContainer.addEventListener("click", setProgress )
 
