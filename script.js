@@ -12,8 +12,6 @@ let songIndex = 0;
 const repeat = document.getElementById("repeat");
 let totalSeconds;
 let totalMinutes;
-let animation;
-let animationProgress = 0;
 let isTotalTime;
 let interval;
 
@@ -21,7 +19,6 @@ function updateProgress(e){
   let currentTIme
   const {duration, currentTime} =e.srcElement;
   const progressPercent = (currentTime / duration) * 100;
-  console.log(progressPercent)
   progressBar.style.width = `${progressPercent}%`
 }
 
