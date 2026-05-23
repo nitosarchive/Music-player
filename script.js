@@ -134,8 +134,8 @@ function fetchSong(event) {
   artistName.innerText = mySongInventory[songIndex].artist;
   albumCover.src = mySongInventory[songIndex].img;
   if(mySong.paused){
-    playBtn.classList.add("hidden")
-    pauseBtn.classList.remove("hidden")
+    playBtn.classList.add("hidden");
+    pauseBtn.classList.remove("hidden");
   }
   mySong.play();
 }
@@ -157,12 +157,11 @@ mySong.addEventListener("ended", () => {
 const progressContainer = document.querySelector(".progress-bar-container");
 
 function setProgress(e){
-  const width = this.clientWidth
-  const clickX = e.offsetX
-  const duration = mySong.duration
-  mySong.currentTime = (clickX/width) * duration
-  getTime()
+  const width = this.clientWidth;
+  const clickX = e.offsetX;
+  const duration = mySong.duration;
+  mySong.currentTime = (clickX/width) * duration;
+  getTime();
 }
 
-progressContainer.addEventListener("click", setProgress )
-
+progressContainer.addEventListener("click", setProgress );
