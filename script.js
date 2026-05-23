@@ -16,7 +16,6 @@ let animation;
 let animationProgress = 0;
 let isTotalTime;
 let interval;
-let time = 0;
 
 function fetchProgress(event) {
   if (event) {
@@ -34,15 +33,16 @@ function fetchProgress(event) {
     progressBar.style.width = `${animationProgress}%`;
   }, 1000);
 }
+
 function getInterval() {
   intervalTime.innerText = "00:00"
   interval = setInterval(() => {
     if (mySong.paused) return;
-    time++;
+    
 
-    minute = Math.floor(time / 60);
+    minute = Math.floor(Math.floor(mySong.currentTime) / 60);
 
-    seconds = time % 60;
+    seconds = Math.floor(mySong.currentTime) % 60;
 
     intervalTime.innerText = `${minute.toString().padStart("2", "0")}:${seconds.toString().padStart("2", "0")}`;
   }, 1000);
@@ -165,3 +165,17 @@ mySong.addEventListener("ended", () => {
   fetchProgress(event);
   fetchSong(undefined);
 });
+
+
+const progressContainer = document.querySelector(".progress-bar-container");
+console.log(progressContainer)
+
+function setProgress(e){
+  const width = this.clientWidth
+  const clickX = e.offsetX
+  const duration = mySong.duration
+  mySong.currentTime = (clickX/width) * duration
+}
+
+progressContainer.addEventListener("click", setProgress)
+
