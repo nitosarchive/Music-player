@@ -80,12 +80,29 @@ button img {
 
 .progress-bar {
   background: white;
-  animation: progress-bar 60s infinite;
   height: inherit;
   position: absolute;
+  display: flex;
+  align-items: center;
   border-radius: 0.3em;
   z-index: 4;
   transition: 0.1s ease;
+}
+
+.progress-bar::after{
+  content: "";
+  display: none;
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  z-index: 20;
+  left: 100%;
+  background: white;
+  border-radius: 50%;
+}
+
+.progress-bar-container:hover .progress-bar::after{
+  display: block;
 }
 
 .progress-bar-container:hover {

@@ -17,7 +17,7 @@ let interval;
 
 function updateProgress(e){
   let currentTIme
-  const duration =mySong.duration;
+  const duration = mySong.duration;
   const currentTime = mySong.currentTime
   const progressPercent = (currentTime / duration) * 100;
   progressBar.style.width = `${progressPercent}%`
