@@ -17,28 +17,21 @@ let animationProgress = 0;
 let isTotalTime;
 let interval;
 
-function fetchProgress(event) {
-  if (event) {
-    if (event.target.id === "nextSong" || event.target.id === "lastSong" || event.target.id === "mySong" || event.target.id === "repeat") {
-      progressBar.style.width = "0%";
-      animationProgress = 0;
-    }
-  }
-  if (animation) clearInterval(animation);
-  animation = setInterval(() => {
-    let duration = 100 / mySong.duration;
-    if (animationProgress === 100) return;
-    if (mySong.paused) return;
-    animationProgress = animationProgress + duration;
-    progressBar.style.width = `${animationProgress}%`;
-  }, 1000);
+function updateProgress(e){
+  let currentTIme
+  const {duration, currentTime} =e.srcElement;
+  const progressPercent = (currentTime / duration) * 100;
+  console.log(progressPercent)
+  progressBar.style.width = `${progressPercent}%`
 }
+
+mySong.addEventListener("timeupdate", updateProgress)
+
 
 function getInterval() {
   intervalTime.innerText = "00:00"
   interval = setInterval(() => {
     if (mySong.paused) return;
-    
 
     minute = Math.floor(Math.floor(mySong.currentTime) / 60);
 
@@ -61,7 +54,7 @@ function playAudio() {
     playBtn.classList.add("hidden");
     pauseBtn.classList.remove("hidden");
   }
-  fetchProgress();
+ 
 }
 
 play.addEventListener("click", playAudio);
@@ -133,7 +126,7 @@ function fetchSong(event) {
       songIndex--;
     }
   }
-  fetchProgress(event);
+
   time = 0;
 
   clearInterval(interval);
@@ -162,13 +155,11 @@ mySong.addEventListener("ended", () => {
   if (songIndex != mySongInventory.length - 1) {
     songIndex++;
   } else songIndex = 0;
-  fetchProgress(event);
   fetchSong(undefined);
 });
 
 
 const progressContainer = document.querySelector(".progress-bar-container");
-console.log(progressContainer)
 
 function setProgress(e){
   const width = this.clientWidth
