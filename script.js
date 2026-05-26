@@ -15,53 +15,60 @@ let totalMinutes;
 let isTotalTime;
 let interval;
 
-function updateProgress(e){
+function updateProgress(){
   const duration = mySong.duration;
-  const currentTime = mySong.currentTime
+  const currentTime = mySong.currentTime;
   const progressPercent = (currentTime / duration) * 100;
-  progressBar.style.width = `${progressPercent}%`
+  progressBar.style.width = `${progressPercent}%`;
 }
 
 mySong.addEventListener("timeupdate", updateProgress)
 
-function getTime(){
-  minute = Math.floor(Math.floor(mySong.currentTime) / 60);
-  seconds = Math.floor(mySong.currentTime) % 60;
-  intervalTime.innerText = `${minute.toString().padStart("2", "0")}:${seconds.toString().padStart("2", "0")}`;
-}
 
 function getInterval() {
   interval = setInterval(() => {
     if (mySong.paused) return;
-    getTime()
+    minute = Math.floor(Math.floor(mySong.currentTime) / 60);
+    seconds = Math.floor(mySong.currentTime) % 60;
+    intervalTime.innerText = `${minute.toString().padStart("2", "0")}:${seconds.toString().padStart("2", "0")}`;
   }, 1000);
 }
+
+function pausePlay(){
+mySong.onload = mySong.addEventListener("pause", ()=>{
+    playBtn.classList.remove("hidden");
+    pauseBtn.classList.add("hidden");
+  })
+  
+  mySong.addEventListener("play", ()=>{
+    playBtn.classList.add("hidden");
+    pauseBtn.classList.remove("hidden");
+  });
+}
+
+pausePlay()
 
 function playAudio() {
   if (interval) clearInterval(interval);
   if (!mySong.paused) {
     mySong.pause();
-    
-    playBtn.classList.remove("hidden");
-    pauseBtn.classList.add("hidden");
   } else {
     mySong.play();
     getInterval();
-    playBtn.classList.add("hidden");
-    pauseBtn.classList.remove("hidden");
   }
  
 }
 
+
+
 play.addEventListener("click", playAudio);
-window.addEventListener("keyup",(e)=>{
+window.addEventListener("keyup", (e)=>{
   if (e.key != " ") return;
   playAudio();
 } )
 
 function totalTime() {
   isTotalTime = false;
-  
   setInterval(() => {
   if(isTotalTime === true ) return;
   if(mySong.duration){
@@ -73,7 +80,13 @@ function totalTime() {
   }, 200);
   
 }
+
+
 window.onload = totalTime;
+
+
+
+
 
 const mySongInventory = [
   {
@@ -152,7 +165,6 @@ mySong.addEventListener("ended", () => {
   } else songIndex = 0;
   fetchSong(undefined);
 });
-
 
 const progressContainer = document.querySelector(".progress-bar-container");
 
