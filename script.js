@@ -35,7 +35,7 @@ function getInterval() {
 }
 
 function pausePlay(){
-mySong.onload = mySong.addEventListener("pause", ()=>{
+  mySong.onload = mySong.addEventListener("pause", ()=>{
     playBtn.classList.remove("hidden");
     pauseBtn.classList.add("hidden");
   })
@@ -49,7 +49,6 @@ mySong.onload = mySong.addEventListener("pause", ()=>{
 pausePlay()
 
 function playAudio() {
-  if (interval) clearInterval(interval);
   if (!mySong.paused) {
     mySong.pause();
   } else {
@@ -83,10 +82,6 @@ function totalTime() {
 
 
 window.onload = totalTime;
-
-
-
-
 
 const mySongInventory = [
   {
@@ -173,7 +168,10 @@ function setProgress(e){
   const clickX = e.offsetX;
   const duration = mySong.duration;
   mySong.currentTime = (clickX/width) * duration;
-  getTime();
+  minute = Math.floor(Math.floor(mySong.currentTime) / 60);
+  seconds = Math.floor(mySong.currentTime) % 60;
+  intervalTime.innerText = `${minute.toString().padStart("2", "0")}:${seconds.toString().padStart("2", "0")}`;
+  
 }
 
 progressContainer.addEventListener("click", setProgress );
