@@ -55,7 +55,6 @@ function playAudio() {
     mySong.play();
     getInterval();
   }
- 
 }
 
 
@@ -67,13 +66,13 @@ window.addEventListener("keyup", (e)=>{
 } )
 
 function totalTime() {
-  mySong.onload =
+  mySong.addEventListener("canplaythrough",()=>{
   totalMinutes = Math.floor(mySong.duration / 60);
   totalSeconds = Math.floor(mySong.duration - totalMinutes * 60);
   fullTime.innerText = `${totalMinutes.toString().padStart("1", "0")}:${totalSeconds.toString().padStart("2", "0")}`;
-
+  })
+ 
 }
-
 
 window.onload = totalTime;
 
@@ -124,21 +123,16 @@ function fetchSong(event) {
       songIndex--;
     }
   }
-
-
-  clearInterval(interval);
-
-  getInterval();
-  
-  totalTime();
   mySong.src = mySongInventory[songIndex].src;
+  totalTime()
   songName.innerText = mySongInventory[songIndex].song;
   artistName.innerText = mySongInventory[songIndex].artist;
   albumCover.src = mySongInventory[songIndex].img;
-  if(mySong.paused){
-    playBtn.classList.add("hidden");
-    pauseBtn.classList.remove("hidden");
-  }
+    
+
+
+  getInterval();
+
   mySong.play();
 }
 
@@ -165,7 +159,6 @@ function setProgress(e){
   minute = Math.floor(Math.floor(mySong.currentTime) / 60);
   seconds = Math.floor(mySong.currentTime) % 60;
   intervalTime.innerText = `${minute.toString().padStart("2", "0")}:${seconds.toString().padStart("2", "0")}`;
-  
 }
 
 progressContainer.addEventListener("click", setProgress );
