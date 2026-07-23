@@ -7,23 +7,90 @@ const songName = document.getElementById("songName");
 const albumCover = document.querySelector(".album-cover");
 const progressBar = document.querySelector(".progress-bar");
 const playBtn = document.querySelector(".play-btn");
-const pauseBtn = document.querySelector(".pause-btn")
+const pauseBtn = document.querySelector(".pause-btn");
+const queueWrapper = document.querySelector(".queue-wrapper");
+const queueBtn = document.querySelector(".queue");
 let songIndex = 0;
 const repeat = document.getElementById("repeat");
 let totalSeconds;
 let totalMinutes;
 let isTotalTime;
 let interval;
+let openClose = 0;
+let chooseDirection;
+let screenSize = window.matchMedia("(min-width: 850px)");
 
-function updateProgress(){
+function openCloseQueue(duration) {
+  if (screenSize.matches) {
+    const queueOpen = [
+      { transform: "translate(0px)" },
+      { transform: "translate(280px)" },
+    ];
+
+    if (openClose === 0) {
+      openClose++;
+      chooseDirection = "normal";
+    } else {
+      openClose--;
+      chooseDirection = "reverse";
+    }
+
+    const queueTimimg = {
+      duration: 400,
+      fill: "forwards",
+
+      direction: chooseDirection,
+    };
+
+    queueWrapper.animate(queueOpen, queueTimimg);
+  }
+  {
+    if (openClose === 0) {
+      queueWrapper.classList.remove("close");
+      openClose++;
+    } else {
+      queueWrapper.classList.add("close");
+      openClose--;
+    }
+  }
+}
+
+screenSize.addEventListener("change", () => {
+  if (screenSize.matches) {
+    !queueWrapper.classList.contains("close")
+      ? queueWrapper.classList.add("close")
+      : null;
+  } else {
+    const queueOpen = [
+      { transform: "translate(0px)" },
+      { transform: "translate(280px)" },
+    ];
+
+    chooseDirection = "reverse";
+
+    const queueTimimg = {
+      duration: 0,
+      fill: "forwards",
+
+      direction: chooseDirection,
+    };
+
+    queueWrapper.animate(queueOpen, queueTimimg);
+  }
+
+  openClose = 0;
+});
+
+queueBtn.addEventListener("click", openCloseQueue);
+
+function updateProgress() {
   const duration = mySong.duration;
   const currentTime = mySong.currentTime;
   const progressPercent = (currentTime / duration) * 100;
   progressBar.style.width = `${progressPercent}%`;
 }
 
-mySong.addEventListener("timeupdate", updateProgress)
-
+mySong.addEventListener("timeupdate", updateProgress);
 
 function getInterval() {
   interval = setInterval(() => {
@@ -34,19 +101,19 @@ function getInterval() {
   }, 1000);
 }
 
-function pausePlay(){
-  mySong.onload = mySong.addEventListener("pause", ()=>{
+function pausePlay() {
+  mySong.onload = mySong.addEventListener("pause", () => {
     playBtn.classList.remove("hidden");
     pauseBtn.classList.add("hidden");
-  })
-  
-  mySong.addEventListener("play", ()=>{
+  });
+
+  mySong.addEventListener("play", () => {
     playBtn.classList.add("hidden");
     pauseBtn.classList.remove("hidden");
   });
 }
 
-pausePlay()
+pausePlay();
 
 function playAudio() {
   if (!mySong.paused) {
@@ -57,21 +124,18 @@ function playAudio() {
   }
 }
 
-
-
 play.addEventListener("click", playAudio);
-window.addEventListener("keyup", (e)=>{
+window.addEventListener("keyup", (e) => {
   if (e.key != " ") return;
   playAudio();
-} )
+});
 
 function totalTime() {
-  mySong.addEventListener("canplaythrough",()=>{
-  totalMinutes = Math.floor(mySong.duration / 60);
-  totalSeconds = Math.floor(mySong.duration - totalMinutes * 60);
-  fullTime.innerText = `${totalMinutes.toString().padStart("1", "0")}:${totalSeconds.toString().padStart("2", "0")}`;
-  })
- 
+  mySong.addEventListener("canplaythrough", () => {
+    totalMinutes = Math.floor(mySong.duration / 60);
+    totalSeconds = Math.floor(mySong.duration - totalMinutes * 60);
+    fullTime.innerText = `${totalMinutes.toString().padStart("1", "0")}:${totalSeconds.toString().padStart("2", "0")}`;
+  });
 }
 
 window.onload = totalTime;
@@ -109,27 +173,41 @@ const mySongInventory = [
   },
 ];
 
+let sliceFactor = 1;
+function fetchQueue() {
+  const elements = mySongInventory.slice(sliceFactor).map((elem) => {
+    return `<span>${elem.song}</span>`;
+  });
+
+  queueWrapper.innerHTML = elements.join("");
+}
+
+fetchQueue();
 function fetchSong(event) {
   if (event) {
     if (event.target.id === "nextSong") {
-      if (songIndex === mySongInventory.length - 1) songIndex = 0;
-      else {
+      if (songIndex === mySongInventory.length - 1) {
+        songIndex = 0;
+        sliceFactor = 1;
+      } else {
         songIndex++;
+        sliceFactor++;
       }
     } else if (event.target.id === "lastSong") {
       if (songIndex === 0) {
         songIndex = mySongInventory.length;
+        sliceFactor = 1;
       }
       songIndex--;
+      sliceFactor--;
     }
+    fetchQueue();
   }
   mySong.src = mySongInventory[songIndex].src;
-  totalTime()
+  totalTime();
   songName.innerText = mySongInventory[songIndex].song;
   artistName.innerText = mySongInventory[songIndex].artist;
   albumCover.src = mySongInventory[songIndex].img;
-    
-
 
   getInterval();
 
@@ -151,14 +229,14 @@ mySong.addEventListener("ended", () => {
 
 const progressContainer = document.querySelector(".progress-bar-container");
 
-function setProgress(e){
+function setProgress(e) {
   const width = this.clientWidth;
   const clickX = e.offsetX;
   const duration = mySong.duration;
-  mySong.currentTime = (clickX/width) * duration;
+  mySong.currentTime = (clickX / width) * duration;
   minute = Math.floor(Math.floor(mySong.currentTime) / 60);
   seconds = Math.floor(mySong.currentTime) % 60;
   intervalTime.innerText = `${minute.toString().padStart("2", "0")}:${seconds.toString().padStart("2", "0")}`;
 }
 
-progressContainer.addEventListener("click", setProgress );
+progressContainer.addEventListener("click", setProgress);

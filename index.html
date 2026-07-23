@@ -10,35 +10,62 @@
   <body>
     <div class="container">
       <header>
-        <button class="previous-page"><img src="./button-imgs/back.png" alt="back"></button>
+        <button class="previous-page">
+          <img src="./button-imgs/back.png" alt="back" />
+        </button>
         <span>Now playing</span>
-        <button class="queue"><img src="./button-imgs/play (1).png" alt="queue"></button>
+        <button class="queue">
+          <img src="./button-imgs/play (1).png" alt="queue" />
+        </button>
       </header>
 
-      <div class="wrapper"><div class="img-container">
-        <img class="album-cover" src="./imgs/octane.webp" alt="album-cover" />
-</div>
+      <div class="wrapper">
+        <div class="img-container">
+          <img class="album-cover" src="./imgs/octane.webp" alt="album-cover" />
+        </div>
         <div class="song-description">
           <h3 id="songName">TMU</h3>
           <span id="artistName">Don Toliver</span>
         </div>
-    
-      <div class="progress-bar-container">
-        <div class="progress-bar"></div>
-        <div class="progress-bar-bg"></div>
-      </div>
-      <div class="time-container">
-        <span id="intervalTime">00:00</span> <span id="fullTime"></span>
-      </div>
 
-      <div id="audioControls">
-        <button id="shuffle"><img src="./button-imgs/shuffle.png" alt="shuffle"></button>
-        <button id="lastSong"><img src="./button-imgs/rewind-button.png" alt="last song"></button>
-        <button id="play"><img class="play-btn" src="./button-imgs/play-button-arrowhead.png" alt="play"> <img class="pause-btn hidden" src="./button-imgs/pause.png" alt=""></button>
-        <button id="nextSong"><img src="./button-imgs/forward-button.png" alt="next song"></button>
-        <button id="repeat"><img src="./button-imgs/repeat.png" alt="repeat"></button>
+        <div class="progress-bar-container">
+          <div class="progress-bar"></div>
+          <div class="progress-bar-bg"></div>
+        </div>
+        <div class="time-container">
+          <span id="intervalTime">00:00</span> <span id="fullTime"></span>
+        </div>
+
+        <div id="audioControls">
+          <button id="shuffle">
+            <img src="./button-imgs/shuffle.png" alt="shuffle" />
+          </button>
+          <button id="lastSong">
+            <img src="./button-imgs/rewind-button.png" alt="last song" />
+          </button>
+          <button id="play">
+            <img
+              class="play-btn"
+              src="./button-imgs/play-button-arrowhead.png"
+              alt="play"
+            />
+            <img
+              class="pause-btn hidden"
+              src="./button-imgs/pause.png"
+              alt=""
+            />
+          </button>
+          <button id="nextSong">
+            <img src="./button-imgs/forward-button.png" alt="next song" />
+          </button>
+          <button id="repeat">
+            <img src="./button-imgs/repeat.png" alt="repeat" />
+          </button>
+        </div>
       </div>
     </div>
+
+    <div class="queue-wrapper close"></div>
   </body>
 </html>
 

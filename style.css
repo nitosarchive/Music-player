@@ -57,6 +57,8 @@ button img {
   width: 100%;
   display: flex;
   border-radius: 0.4em;
+  position: relative;
+  z-index: 3;
   flex-direction: column;
   gap: 1.5em;
   padding: 1em;
@@ -89,7 +91,7 @@ button img {
   transition: 0.1s ease;
 }
 
-.progress-bar::after{
+.progress-bar::after {
   content: "";
   display: none;
   width: 10px;
@@ -101,7 +103,7 @@ button img {
   border-radius: 50%;
 }
 
-.progress-bar-container:hover .progress-bar::after{
+.progress-bar-container:hover .progress-bar::after {
   display: block;
 }
 
@@ -149,4 +151,33 @@ img {
 
 .song-description {
   width: 100%;
+}
+
+.queue-wrapper {
+  background-color: white;
+  display: flex;
+  position: absolute;
+
+  flex-direction: column;
+  gap: 1em;
+  text-transform: capitalize;
+  color: black;
+  min-width: 200px;
+  padding-inline-start: 1em;
+}
+
+.queue-wrapper span {
+  cursor: pointer;
+}
+.queueContainer {
+  position: relative;
+  width: 100%;
+}
+
+.queue-wrapper:not(.close) {
+  z-index: 3;
+}
+
+.queue-wrapper.close {
+  z-index: 1;
 }
