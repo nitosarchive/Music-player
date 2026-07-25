@@ -9,6 +9,7 @@ const progressBar = document.querySelector(".progress-bar");
 const playBtn = document.querySelector(".play-btn");
 const pauseBtn = document.querySelector(".pause-btn");
 const queueWrapper = document.querySelector(".queue-wrapper");
+const shuffle = document.querySelector("#shuffle");
 const queueBtn = document.querySelector(".queue");
 let songIndex = 0;
 const repeat = document.getElementById("repeat");
@@ -19,6 +20,7 @@ let interval;
 let openClose = 0;
 let chooseDirection;
 let screenSize = window.matchMedia("(min-width: 850px)");
+let concurrentIndex;
 
 function openCloseQueue(duration) {
   if (screenSize.matches) {
@@ -140,7 +142,7 @@ function totalTime() {
 
 window.onload = totalTime;
 
-const mySongInventory = [
+let mySongInventory = [
   {
     artist: "Don Toliver",
     song: "TMU",
@@ -173,6 +175,31 @@ const mySongInventory = [
   },
 ];
 
+function fetchShuffle() {
+  mySongInventory.splice(songIndex, 1);
+  let currentIndex = mySongInventory.length;
+
+  // While there remain elements to shuffle...
+  while (currentIndex != 0) {
+    // Pick a remaining element...
+    let randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+    // And swap it with the current element.
+    [mySongInventory[currentIndex], mySongInventory[randomIndex]] = [
+      mySongInventory[randomIndex],
+      mySongInventory[currentIndex],
+    ];
+  }
+
+  mySongInventory.unshift(concurrentIndex);
+
+  songIndex = 0;
+  sliceFactor = 1;
+  fetchQueue();
+}
+
+shuffle.addEventListener("click", fetchShuffle);
+
 let sliceFactor = 1;
 function fetchQueue() {
   const elements = mySongInventory.slice(sliceFactor).map((elem) => {
@@ -183,6 +210,7 @@ function fetchQueue() {
 }
 
 fetchQueue();
+
 function fetchSong(event) {
   if (event) {
     if (event.target.id === "nextSong") {
@@ -203,6 +231,7 @@ function fetchSong(event) {
     }
     fetchQueue();
   }
+  concurrentIndex = mySongInventory[songIndex];
   mySong.src = mySongInventory[songIndex].src;
   totalTime();
   songName.innerText = mySongInventory[songIndex].song;
@@ -210,7 +239,6 @@ function fetchSong(event) {
   albumCover.src = mySongInventory[songIndex].img;
 
   getInterval();
-
   mySong.play();
 }
 
