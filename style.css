@@ -150,7 +150,6 @@ img {
 }
 
 .song-description {
-  width: 100%;
 }
 
 .queue-wrapper {
@@ -180,4 +179,27 @@ img {
 
 .queue-wrapper.close {
   z-index: 1;
+}
+
+.audio-string {
+  width: 5px;
+  background-color: white;
+  border-radius: 0.4em;
+  transition: height 0.2s ease-in-out;
+}
+
+.string-container {
+  height: 50px;
+  display: flex;
+  align-items: end;
+
+  gap: 0.3em;
+}
+
+.mid-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: flex-start;
+  width: 100%;
 }

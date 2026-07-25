@@ -240,3 +240,18 @@ function setProgress(e) {
 }
 
 progressContainer.addEventListener("click", setProgress);
+
+function getRand(max) {
+  return Math.floor(Math.random() * max);
+}
+
+const audioString = document.querySelectorAll(".audio-string");
+
+function getHeight(string) {
+  setInterval(() => {
+    if (!mySong.paused) {
+      string.style.height = `${getRand(20)}px`;
+    } else return (string.style.height = `2px`);
+  }, 180);
+}
+audioString.forEach(getHeight);
