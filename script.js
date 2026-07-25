@@ -21,6 +21,7 @@ let openClose = 0;
 let chooseDirection;
 let screenSize = window.matchMedia("(min-width: 850px)");
 let concurrentIndex;
+let shuffled = false;
 
 function openCloseQueue(duration) {
   if (screenSize.matches) {
@@ -175,23 +176,30 @@ let mySongInventory = [
   },
 ];
 
+const defaultPosition = [...mySongInventory];
+
 function fetchShuffle() {
-  mySongInventory.splice(songIndex, 1);
-  let currentIndex = mySongInventory.length;
+  if (shuffled === false) {
+    mySongInventory.splice(songIndex, 1);
+    let currentIndex = mySongInventory.length;
 
-  // While there remain elements to shuffle...
-  while (currentIndex != 0) {
-    // Pick a remaining element...
-    let randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-    // And swap it with the current element.
-    [mySongInventory[currentIndex], mySongInventory[randomIndex]] = [
-      mySongInventory[randomIndex],
-      mySongInventory[currentIndex],
-    ];
+    // While there remain elements to shuffle...
+    while (currentIndex != 0) {
+      // Pick a remaining element...
+      let randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+      // And swap it with the current element.
+      [mySongInventory[currentIndex], mySongInventory[randomIndex]] = [
+        mySongInventory[randomIndex],
+        mySongInventory[currentIndex],
+      ];
+    }
+    shuffled = true;
+    mySongInventory.unshift(concurrentIndex);
+  } else {
+    shuffled = false;
+    mySongInventory = [...defaultPosition];
   }
-
-  mySongInventory.unshift(concurrentIndex);
 
   songIndex = 0;
   sliceFactor = 1;
