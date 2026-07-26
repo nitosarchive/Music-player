@@ -46,8 +46,7 @@ function openCloseQueue(duration) {
     };
 
     queueWrapper.animate(queueOpen, queueTimimg);
-  }
-  {
+  } else {
     if (openClose === 0) {
       queueWrapper.classList.remove("close");
       openClose++;
@@ -187,6 +186,7 @@ function fetchShuffle() {
     while (currentIndex != 0) {
       // Pick a remaining element...
       let randomIndex = Math.floor(Math.random() * currentIndex);
+      console.log(randomIndex);
       currentIndex--;
       // And swap it with the current element.
       [mySongInventory[currentIndex], mySongInventory[randomIndex]] = [
@@ -287,7 +287,7 @@ function getHeight(string) {
   setInterval(() => {
     if (!mySong.paused) {
       string.style.height = `${getRand(20)}px`;
-    } else return (string.style.height = `2px`);
+    } else return (string.style.height = `1px`);
   }, 180);
 }
 audioString.forEach(getHeight);
